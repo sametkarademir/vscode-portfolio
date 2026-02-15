@@ -28,7 +28,7 @@ const projects: Project[] = [
     description:
       "Modern, full-stack task management uygulaması. .NET 9.0 backend ve React 19 + TypeScript frontend ile geliştirilmiş. Kanban board, drag-and-drop, RBAC, dashboard, raporlama, çoklu dil desteği ve işbirlikçi görev yönetimi özellikleri içerir.",
     techStack: [".NET 9", "React 19", "TypeScript", "Tailwind CSS", "PostgreSQL"],
-    liveUrl: "https://taskflow.sametkarademir.com",
+    liveUrl: "https://s2v9.sametkarademir.com",
     githubUrl: "https://github.com/sametkarademir/taskflow-app",
     image: "/images/projects/taskflow-kanban.png",
     images: [
