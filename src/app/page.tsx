@@ -1,65 +1,108 @@
-import Image from "next/image";
+"use client";
+
+import React, { useState } from "react";
+import Sidebar from "@/components/sidebar/Sidebar";
+import NavBar from "@/components/navbar/NavBar";
+import Header from "@/components/pages/Header";
+import About from "@/components/pages/About";
+import Projects from "@/components/pages/Projects";
+import Resume from "@/components/pages/Resume";
+import Contact from "@/components/pages/Contact";
+import MobileMenu from "@/components/sidebar/MobileMenu";
+import FileView from "@/components/FileView";
+import AppTerminal from "@/components/terminal/AppTerminal";
+import { GITIGNORE_CONTENT, ENV_CONTENT, PACKAGE_JSON_CONTENT } from "@/constants/content";
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState("home");
+  const [visibleTabs, setVisibleTabs] = useState<string[]>(["home"]);
+  const [terminalOpen, setTerminalOpen] = useState(true);
+
+  const setActiveTabAndShow = (tab: string) => {
+    setActiveTab(tab);
+    setVisibleTabs((prev) => (prev.includes(tab) ? prev : [...prev, tab]));
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="flex h-screen overflow-hidden bg-bg-primary">
+      <div className="hidden lg:block w-[260px] flex-shrink-0">
+        <Sidebar activeTab={activeTab} setActiveTab={setActiveTabAndShow} />
+      </div>
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        <MobileMenu activeTab={activeTab} setActiveTab={setActiveTabAndShow} />
+        <div className="hidden lg:block h-[42px] flex-shrink-0">
+          <NavBar
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            visibleTabs={visibleTabs}
+            setVisibleTabs={setVisibleTabs}
+          />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+
+        <main className="flex-1 overflow-y-auto">
+          {activeTab === "home" && (
+            <div>
+              <Header />
+              <About />
+              <Resume />
+              <Projects />
+              <Contact />
+            </div>
+          )}
+          {activeTab === "header" && <Header />}
+          {activeTab === "about" && <About />}
+          {activeTab === "projects" && <Projects />}
+          {activeTab === "resume" && <Resume />}
+          {activeTab === "contact" && <Contact />}
+          {activeTab === "gitignore" && (
+            <FileView
+              filename=".gitignore"
+              content={GITIGNORE_CONTENT}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          )}
+          {activeTab === "env" && (
+            <FileView
+              filename=".env"
+              content={ENV_CONTENT}
+            />
+          )}
+          {activeTab === "packagejson" && (
+            <FileView
+              filename="package.json"
+              content={PACKAGE_JSON_CONTENT}
+            />
+          )}
+        </main>
+
+        <AppTerminal
+          isOpen={terminalOpen}
+          onToggle={() => setTerminalOpen((prev) => !prev)}
+          onClose={() => setTerminalOpen(false)}
+          activeTab={activeTab}
+          onNavigate={setActiveTabAndShow}
+        />
+
+        <div className="h-6 flex-shrink-0 bg-bg-secondary border-t border-border-muted flex items-center px-3 justify-between">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1.5">
+              <div className="w-2 h-2 rounded-full bg-accent-green" />
+              <span className="text-[11px] text-text-muted">Ready</span>
+            </div>
+            <span className="text-[11px] text-text-muted hidden sm:inline">
+              main*
+            </span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="text-[11px] text-text-muted hidden sm:inline">
+              TypeScript React
+            </span>
+            <span className="text-[11px] text-text-muted">UTF-8</span>
+            <span className="text-[11px] text-text-muted hidden sm:inline">
+              Ln 1, Col 1
+            </span>
+          </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
