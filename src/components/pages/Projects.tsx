@@ -176,7 +176,7 @@ const Projects: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, i) => (
+          {projects.map((project) => (
             <div
               key={project.title}
               className="group flex flex-col rounded-2xl overflow-hidden bg-bg-secondary/60 border border-border-muted hover:border-accent-pink/30 transition-all duration-300 hover:shadow-[0_0_40px_-10px_rgba(247,120,186,0.15)]"

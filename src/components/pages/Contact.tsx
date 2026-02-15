@@ -139,16 +139,16 @@ const Contact: React.FC = () => {
                         key={index}
                         className="pl-6 font-semibold underline decoration-accent-blue underline-offset-2"
                       >
-                        "status": "{contactData.status}",
+                        &quot;status&quot;: &quot;{contactData.status}&quot;,
                       </p>
                     );
                   }
                   if (line.includes('"email"')) {
                     return (
                       <p key={index} className="pl-6">
-                        "email":{" "}
+                        &quot;email&quot;:{" "}
                         <span className="text-accent-green">
-                          "{contactData.email}"
+                          &quot;{contactData.email}&quot;
                         </span>
                         ,
                       </p>
@@ -157,9 +157,9 @@ const Contact: React.FC = () => {
                   if (line.includes('"location"')) {
                     return (
                       <p key={index} className="pl-6">
-                        "location":{" "}
+                        &quot;location&quot;:{" "}
                         <span className="text-accent-green">
-                          "{contactData.location}"
+                          &quot;{contactData.location}&quot;
                         </span>
                         ,
                       </p>
@@ -168,7 +168,7 @@ const Contact: React.FC = () => {
                   if (line.includes('"socials"')) {
                     return (
                       <p key={index} className="pl-6">
-                        "socials": [
+                        &quot;socials&quot;: [
                         {contactData.socials.map((s, i) => (
                           <span key={s.name}>
                             {i > 0 && ", "}
@@ -178,7 +178,7 @@ const Contact: React.FC = () => {
                               rel="noopener noreferrer"
                               className="text-accent-cyan hover:underline focus:outline-none focus:underline"
                             >
-                              "{s.name}"
+                              &quot;{s.name}&quot;
                             </a>
                           </span>
                         ))}
@@ -189,9 +189,9 @@ const Contact: React.FC = () => {
                   if (line.includes('"message"')) {
                     return (
                       <p key={index} className="pl-6">
-                        "message":{" "}
+                        &quot;message&quot;:{" "}
                         <span className="text-accent-green">
-                          "{contactData.message}"
+                          &quot;{contactData.message}&quot;
                         </span>
                       </p>
                     );

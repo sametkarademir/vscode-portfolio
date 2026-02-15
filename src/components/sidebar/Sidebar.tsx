@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { FileCode2, FileText, Image } from "lucide-react";
+import { FileCode2, FileText } from "lucide-react";
 import RootFileItem from "@/components/sidebar/RootFileItem";
 import SidebarFolder from "@/components/sidebar/SidebarFolder";
 import SidebarSocialLinks from "@/components/sidebar/SidebarSocialLinks";

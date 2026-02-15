@@ -2,6 +2,7 @@
 
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import Image from "next/image";
 
 interface MarkdownSplitViewProps {
   filename: string;
@@ -66,9 +67,11 @@ const MarkdownSplitView: React.FC<MarkdownSplitViewProps> = ({
                     </a>
                   ),
                   img: ({ src, alt }) => (
-                    <img
-                      src={src}
+                    <Image
+                      src={src || ""}
                       alt={alt ?? ""}
+                      width={24}
+                      height={24}
                       className="inline-block max-h-6 align-middle"
                     />
                   ),
